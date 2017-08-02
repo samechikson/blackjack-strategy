@@ -30,6 +30,10 @@ class Card {
     toString() {
         return `${this.rank.toTitleCase()} of ${this.suit.toTitleCase()}`
     }
+
+    getCount() {
+        return isNaN(this.rank) ? 10 : +this.rank;
+    }
 }
 
 module.exports = Card;

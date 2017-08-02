@@ -10,7 +10,9 @@ class App extends Component {
     this.state = {
       deck : this.initializeDeck(),
       dealerHand : [],
-      playerHand : []
+      playerHand : [],
+      dealerCount : 0,
+      playerCount : 0
     }
   }
 
@@ -31,6 +33,8 @@ class App extends Component {
     let deck = this.state.deck.concat([]);
     let newPlayerHand = this.state.playerHand.concat([]);
     let newDealerHand = this.state.dealerHand.concat([]);
+    let playerCount = this.state.playerCount;
+    let dealerCount = this.state.dealerCount;
 
     order.forEach((move) => {
       console.log(move);
@@ -38,9 +42,11 @@ class App extends Component {
       switch (move) {
         case 'player':
           newPlayerHand.push(newCard);
+          playerCount += newCard.getCount();
           break;
         case 'dealer':
           newDealerHand.push(newCard);
+          dealerCount += newCard.getCount();
           break;
         default:
           console.log('nothing dealt');
@@ -49,7 +55,9 @@ class App extends Component {
       this.setState({
         deck: deck,
         dealerHand: newDealerHand,
-        playerHand: newPlayerHand
+        playerHand: newPlayerHand,
+        playerCount: playerCount,
+        dealerCount: dealerCount
       })
 
     })
@@ -62,7 +70,8 @@ class App extends Component {
 
     this.setState({
       deck : deck,
-      playerHand : playerHand
+      playerHand : playerHand,
+      playerCount : this.state.playerCount + newCard.getCount()
     })
   }
 
@@ -79,15 +88,18 @@ class App extends Component {
         </div>
         <div className="Dealer">
           <h4>Dealer</h4>
+          <h5>Count: {this.state.dealerCount}</h5>
           { this.state.dealerHand.map((card) => {
             return <p key={'dealer' + card.toString()}>{card.toString()}</p>
           })}
         </div>
         <div className="Player">
           <h4>Player</h4>
-          <button onClick={() => this.addCardToPlayer()}>
-            Hit
-          </button>
+          <button onClick={() => this.addCardToPlayer()}>Hit</button>
+          <button>Stand</button>
+          <button>Double</button>
+          <button>Split</button>
+          <h5>Count: {this.state.playerCount}</h5>
           { this.state.playerHand.map((card) => {
             return <p key={'player' + card.toString()}>{card.toString()}</p>
           })}
