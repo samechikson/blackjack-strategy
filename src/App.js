@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Cards from 'js-playing-cards/src';
 import Card from './Card.js';
+import Strategy from './basicStrategyMatrix.js';
 
 class App extends Component {
   constructor() {
@@ -37,7 +38,6 @@ class App extends Component {
     let dealerCount = this.state.dealerCount;
 
     order.forEach((move) => {
-      console.log(move);
       let newCard = deck.pop();
       switch (move) {
         case 'player':
@@ -51,7 +51,6 @@ class App extends Component {
         default:
           console.log('nothing dealt');
       }
-      console.log(newDealerHand, newPlayerHand);
       this.setState({
         deck: deck,
         dealerHand: newDealerHand,
@@ -59,7 +58,6 @@ class App extends Component {
         playerCount: playerCount,
         dealerCount: dealerCount
       })
-
     })
   }
 
@@ -79,6 +77,14 @@ class App extends Component {
     this.dealCards();
   }
 
+  checkStrategy(strategy) {
+    let isCorrect = strategy.indexOf(Strategy.hard17[this.state.playerCount][this.state.dealerHand[1].getCount()]) >= 0;
+    console.log(isCorrect, this.state.playerCount, this.state.dealerHand[1].getCount(), Strategy.hard17[this.state.playerCount][this.state.dealerHand[1].getCount()]);
+    this.setState({
+      isCorrectStrategy: isCorrect
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -95,11 +101,15 @@ class App extends Component {
         </div>
         <div className="Player">
           <h4>Player</h4>
-          <button onClick={() => this.addCardToPlayer()}>Hit</button>
-          <button>Stand</button>
-          <button>Double</button>
-          <button>Split</button>
+          <button onClick={() => {
+            this.checkStrategy('H');
+            this.addCardToPlayer();
+          }}>Hit</button>
+          <button onClick={() => this.checkStrategy('S')}>Stand</button>
+          <button onClick={() => this.checkStrategy('D')}>Double</button>
+          <button onClick={() => this.checkStrategy('S')}>Split</button>
           <h5>Count: {this.state.playerCount}</h5>
+          <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
           { this.state.playerHand.map((card) => {
             return <p key={'player' + card.toString()}>{card.toString()}</p>
           })}
