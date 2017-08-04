@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      deck : this.initializeDeck(),
+      deck : this.shuffle(this.initializeDeck()),
       dealerHand : [],
       playerHand : [],
       dealerCount : 0,
@@ -61,6 +61,14 @@ class App extends Component {
     })
   }
 
+  shuffle(a) {
+    for (let i = a.length; i; i--) {
+      let j = Math.floor(Math.random() * i);
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+    return a;
+  }
+
   addCardToPlayer() {
     let deck = this.state.deck.concat([]);
     let newCard = deck.pop();
@@ -83,6 +91,7 @@ class App extends Component {
     this.setState({
       isCorrectStrategy: isCorrect
     })
+    return isCorrect;
   }
 
   render() {
@@ -103,11 +112,11 @@ class App extends Component {
           <h4>Player</h4>
           <button onClick={() => {
             this.checkStrategy('H');
-            this.addCardToPlayer();
+            // this.addCardToPlayer();
           }}>Hit</button>
           <button onClick={() => this.checkStrategy('S')}>Stand</button>
           <button onClick={() => this.checkStrategy('D')}>Double</button>
-          <button onClick={() => this.checkStrategy('S')}>Split</button>
+          <button onClick={() => this.checkStrategy('P')}>Split</button>
           <h5>Count: {this.state.playerCount}</h5>
           <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
           { this.state.playerHand.map((card) => {
