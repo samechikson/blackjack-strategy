@@ -13,7 +13,8 @@ class App extends Component {
       dealerHand : [],
       playerHand : [],
       dealerCount : 0,
-      playerCount : 0
+      playerCount : 0,
+      showDealerHand: false
     }
     this.startState = this.state;
   }
@@ -95,6 +96,25 @@ class App extends Component {
     return isCorrect;
   }
 
+  finishHand() {
+    // Player has finished turn; dealer's turn
+    let deck = this.state.deck.concat([]);
+    let dealerHand = this.state.dealerHand.concat([]);
+    let dealerCount = this.state.dealerCount;
+    while(dealerCount <= 17) {
+      let newCard = deck.pop();
+      dealerHand.push(newCard);
+      dealerCount += newCard.getCount();
+    }
+
+    this.setState({
+      deck: deck,
+      dealerHand: dealerHand,
+      dealerCount: dealerCount,
+      showDealerHand: true
+    })
+  }
+
   restart() {
     this.setState({
       dealerHand : [],
@@ -114,10 +134,12 @@ class App extends Component {
         </div>
         <div className="Dealer">
           <h4>Dealer</h4>
-          <h5>Count: {this.state.dealerCount}</h5>
-          { this.state.dealerHand.map((card, i) => {
-            return <p key={card.toString()}>{card.toString()}</p>
-          })}
+          <ul>
+            <li>{this.state.showDealerHand ? this.state.dealerHand[0].toString(): "Hidden"}</li>
+            { this.state.dealerHand.slice(1).map((card, i) => {
+              return <li key={card.toString()}>{card.toString()}</li>
+            })}
+          </ul>
         </div>
         <div className="Player">
           <h4>Player</h4>
@@ -127,7 +149,8 @@ class App extends Component {
           }}>Hit</button>
           <button onClick={() => {
             this.checkStrategy('S');
-            this.restart();
+            this.finishHand();
+            // this.restart();
           }}>Stand</button>
           <button onClick={() => this.checkStrategy('D')}>Double</button>
           <button onClick={() => this.checkStrategy('P')}>Split</button>
