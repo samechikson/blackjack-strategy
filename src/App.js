@@ -15,6 +15,7 @@ class App extends Component {
       dealerCount : 0,
       playerCount : 0
     }
+    this.startState = this.state;
   }
 
   initializeDeck() {
@@ -94,6 +95,16 @@ class App extends Component {
     return isCorrect;
   }
 
+  restart() {
+    this.setState({
+      dealerHand : [],
+      playerHand : [],
+      dealerCount : 0,
+      playerCount : 0
+    },
+    this.dealCards);
+  }
+
   render() {
     return (
       <div className="App">
@@ -104,23 +115,26 @@ class App extends Component {
         <div className="Dealer">
           <h4>Dealer</h4>
           <h5>Count: {this.state.dealerCount}</h5>
-          { this.state.dealerHand.map((card) => {
-            return <p key={'dealer' + card.toString()}>{card.toString()}</p>
+          { this.state.dealerHand.map((card, i) => {
+            return <p key={card.toString()}>{card.toString()}</p>
           })}
         </div>
         <div className="Player">
           <h4>Player</h4>
           <button onClick={() => {
             this.checkStrategy('H');
-            // this.addCardToPlayer();
+            this.addCardToPlayer();
           }}>Hit</button>
-          <button onClick={() => this.checkStrategy('S')}>Stand</button>
+          <button onClick={() => {
+            this.checkStrategy('S');
+            this.restart();
+          }}>Stand</button>
           <button onClick={() => this.checkStrategy('D')}>Double</button>
           <button onClick={() => this.checkStrategy('P')}>Split</button>
           <h5>Count: {this.state.playerCount}</h5>
           <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
-          { this.state.playerHand.map((card) => {
-            return <p key={'player' + card.toString()}>{card.toString()}</p>
+          { this.state.playerHand.map((card, i) => {
+            return <p key={card.toString()}>{card.toString()}</p>
           })}
         </div>
       </div>
