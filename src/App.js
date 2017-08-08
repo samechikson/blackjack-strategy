@@ -88,7 +88,16 @@ class App extends Component {
   }
 
   checkStrategy(strategy) {
-    let isCorrect = strategy.indexOf(Strategy.hard17[this.state.playerCount][this.state.dealerHand[1].getCount()]) >= 0;
+    let isCorrect;
+    let playerCount = this.state.playerCount;
+    let dealerShowingCount = this.state.dealerHand[1].getCount();
+    // Check for splitting possibility.
+    if (this.state.playerCount % 2 == 0 && Strategy.splits[playerCount][dealerShowingCount] != '0') {
+      isCorrect = strategy.indexOf(Strategy.splits[playerCount][dealerShowingCount]) >= 0;
+    }
+    else {
+      isCorrect = strategy.indexOf(Strategy.hard17[playerCount][dealerShowingCount]) >= 0;
+    }
     console.log(isCorrect, this.state.playerCount, this.state.dealerHand[1].getCount(), Strategy.hard17[this.state.playerCount][this.state.dealerHand[1].getCount()]);
     this.setState({
       isCorrectStrategy: isCorrect
@@ -156,9 +165,11 @@ class App extends Component {
           <button onClick={() => this.checkStrategy('P')}>Split</button>
           <h5>Count: {this.state.playerCount}</h5>
           <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
-          { this.state.playerHand.map((card, i) => {
-            return <p key={card.toString()}>{card.toString()}</p>
-          })}
+          <ul>
+            { this.state.playerHand.map((card, i) => {
+              return <li key={card.toString()}>{card.toString()}</li>
+            })}
+          </ul>
         </div>
       </div>
     );
