@@ -120,7 +120,8 @@ class App extends Component {
       deck: deck,
       dealerHand: dealerHand,
       dealerCount: dealerCount,
-      showDealerHand: true
+      showDealerHand: true,
+      gameStatus: dealerCount == this.state.playerCount ? 'Push' : dealerCount < this.state.playerCount || dealerCount > 21 ? 'Player Wins' : 'Dealer Wins'
     })
   }
 
@@ -170,6 +171,9 @@ class App extends Component {
               return <li key={card.toString()}>{card.toString()}</li>
             })}
           </ul>
+        </div>
+        <div className="gameStatus">
+          {this.state.gameStatus}
         </div>
       </div>
     );
