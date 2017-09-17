@@ -4,6 +4,7 @@ import './App.css';
 import Cards from 'js-playing-cards/src';
 import Card from './Card.js';
 import Strategy from './basicStrategyMatrix.js';
+import Hand from './hand.js';
 
 class App extends Component {
   constructor() {
@@ -121,7 +122,8 @@ class App extends Component {
       dealerHand: dealerHand,
       dealerCount: dealerCount,
       showDealerHand: true,
-      gameStatus: dealerCount == this.state.playerCount ? 'Push' : dealerCount < this.state.playerCount || dealerCount > 21 ? 'Player Wins' : 'Dealer Wins'
+      gameStatus: dealerCount == this.state.playerCount ? 'Push' : 
+                    dealerCount < this.state.playerCount || dealerCount > 21 ? 'Player Wins' : 'Dealer Wins'
     })
   }
 
@@ -144,12 +146,7 @@ class App extends Component {
         </div>
         <div className="Dealer">
           <h4>Dealer</h4>
-          <ul>
-            <li>{this.state.showDealerHand ? this.state.dealerHand[0].toString(): "Hidden"}</li>
-            { this.state.dealerHand.slice(1).map((card, i) => {
-              return <li key={card.toString()}>{card.toString()}</li>
-            })}
-          </ul>
+          <Hand cards={this.state.dealerHand} hideFirst={true} />
         </div>
         <div className="Player">
           <h4>Player</h4>
@@ -166,14 +163,14 @@ class App extends Component {
           <button onClick={() => this.checkStrategy('P')}>Split</button>
           <h5>Count: {this.state.playerCount}</h5>
           <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
-          <ul>
-            { this.state.playerHand.map((card, i) => {
-              return <li key={card.toString()}>{card.toString()}</li>
-            })}
-          </ul>
+          <Hand cards={this.state.playerHand} hideFirst={false} />
         </div>
         <div className="gameStatus">
           {this.state.gameStatus}
+        </div>
+
+        <div className="restart">
+          <button onClick={() => this.restart()}>Restart</button>
         </div>
       </div>
     );
