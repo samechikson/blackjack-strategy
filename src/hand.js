@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Card, CardText } from 'material-ui/Card';
+
 
 export default class Hand extends Component {
     constructor(props) {
@@ -7,9 +9,16 @@ export default class Hand extends Component {
 
     render() {
         return (
-            <ul>
-                {this.props.cards && this.props.cards.map((card, i) => {
-                    return <li key={card.toString()}>{this.props.hideFirst && i == 0 ? "Hidden" : card.toString()}</li>
+            <ul className="Hand">
+                {this.props.cards.map((card, i) => {
+                    return (
+                        <li key={card.toString()}>
+                            <Card>
+                                <CardText>
+                                    {this.props.hideFirst && i == 0 ? "Hidden" : card.toString()}
+                                </CardText>
+                            </Card>
+                        </li>)
                 })}
             </ul>
         )

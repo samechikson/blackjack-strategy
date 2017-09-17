@@ -5,6 +5,9 @@ import Cards from 'js-playing-cards/src';
 import Card from './Card.js';
 import Strategy from './basicStrategyMatrix.js';
 import Hand from './hand.js';
+import Header from './header.js';
+
+import RaisedButton from 'material-ui/RaisedButton';
 
 class App extends Component {
   constructor() {
@@ -132,7 +135,9 @@ class App extends Component {
       dealerHand : [],
       playerHand : [],
       dealerCount : 0,
-      playerCount : 0
+      playerCount : 0,
+      showDealerHand: false,
+      gameStatus: ''
     },
     this.dealCards);
   }
@@ -140,27 +145,24 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
+        <Header />
         <div className="Dealer">
           <h4>Dealer</h4>
-          <Hand cards={this.state.dealerHand} hideFirst={true} />
+          <Hand cards={this.state.dealerHand} hideFirst={!this.state.showDealerHand} />
         </div>
         <div className="Player">
           <h4>Player</h4>
-          <button onClick={() => {
+          <RaisedButton className="ActionButton" label="Hit" primary={true} onClick={() => {
             this.checkStrategy('H');
             this.addCardToPlayer();
-          }}>Hit</button>
-          <button onClick={() => {
+          }}/>
+          <RaisedButton className="ActionButton" label="Stand" onClick={() => {
             this.checkStrategy('S');
             this.finishHand();
             // this.restart();
-          }}>Stand</button>
-          <button onClick={() => this.checkStrategy('D')}>Double</button>
-          <button onClick={() => this.checkStrategy('P')}>Split</button>
+          }}/>
+          <RaisedButton className="ActionButton" label="Split" secondary={true} onClick={() => this.checkStrategy('P')} />
+          <RaisedButton className="ActionButton" label="Double" secondary={true} onClick={() => this.checkStrategy('D')} />
           <h5>Count: {this.state.playerCount}</h5>
           <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
           <Hand cards={this.state.playerHand} hideFirst={false} />
@@ -170,7 +172,7 @@ class App extends Component {
         </div>
 
         <div className="restart">
-          <button onClick={() => this.restart()}>Restart</button>
+          <RaisedButton label="Restart" primary={true} onClick={() => this.restart()} />
         </div>
       </div>
     );

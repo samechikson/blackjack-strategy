@@ -22,3 +22,21 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+ul.Hand, ul.Hand li {
+  list-style: none;
+  display: flex;
+}
+
+ul.Hand {
+  justify-content: center;
+  flex-direction: row;
+}
+
+ul.Hand li {
+  margin: 1.5em;
+}
+
+.ActionButton {
+  margin: 0 5px;
+}
