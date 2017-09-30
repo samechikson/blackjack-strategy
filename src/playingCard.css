@@ -1,0 +1,65 @@
+.Card {
+    z-index: 1;
+    position: relative;
+    background: white;
+    width: 200px;
+    height: 250px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.Card .Panel {
+    position: absolute;
+    width: 100%;
+    background: #363636;
+    padding: 30px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.Card .Panel:last-child {
+    bottom: 0;
+}
+
+.Card .Panel .Rank {
+    display: inline-block;
+    font-size: 42px;
+    font-weight: 100;
+}
+
+.Card .Panel .Suit {
+    display: inline-block;
+    padding: 6px 0 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    float: right;
+}
+
+.Card .Panel .Icon {
+    background: white;
+    width: 47px;
+    height: 47px;
+    margin: 15px 0 -54px -10px;
+    padding: 13px;
+    border-radius: 100%;
+    line-height: 47px;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.Card .Panel .Svg {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+}
+    
+
+.Card .Panel .bottom {
+    transform: rotate(180deg);
+}
