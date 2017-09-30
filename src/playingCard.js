@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import ReactSVG from 'react-svg';
-import Spade from 'svg-react-loader?name=spade!./spade.svg';
+import SpadeSVG from './svg/spade.svg';
+import JackSVG from './svg/jack.svg';
 
-import { Card, CardText } from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import './playingCard.css';
 
 export default class PlayingCard extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -21,12 +18,11 @@ export default class PlayingCard extends Component {
                         {this.props.card.getSuit()}
                     </div>
                     <div className="Icon">
-                        <ReactSVG path="spade.svg"
-                            callback={svg => console.log(svg)} />
-                        <Spade />
+                        <SpadeSVG width="20" height="20" />
                     </div>
                 </div>
                 <div className="Content">
+                    <JackSVG />
                 </div>
                 <div className="Panel Bottom">
                 </div>
