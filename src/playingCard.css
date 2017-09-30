@@ -21,6 +21,14 @@
     color: white;
 }
 
+.Card.spades .Panel, .Card.clubs .Panel {
+    background-color: #39474E;
+}
+
+.Card.diamonds .Panel, .Card.hearts .Panel {
+    background-color: #C65551;
+}
+
 .Card .Panel:last-child {
     bottom: 0;
 }
@@ -59,6 +67,14 @@
     margin-top: 5px;
 }
 
+.Card.spades .Panel .Icon svg, .Card.clubs .Panel .Icon svg {
+    fill: #39474E;
+}
+
+.Card.hearts .Panel .Icon svg, .Card.diamonds .Panel .Icon svg {
+    fill: #C65551;
+}
+
 .Card .Panel .Svg {
     display: block;
     height: 100%;
@@ -74,12 +90,11 @@
     text-align: center;
 }
 
-.Card .Content div {
-    display: table-cell;
-    vertical-align: middle;
+.Card .Content svg {
+    margin-top: 25px;
 }
-    
 
 .Card .Panel .bottom {
     transform: rotate(180deg);
 }
+
