@@ -3,7 +3,7 @@
     position: relative;
     background: white;
     width: 200px;
-    height: 250px;
+    height: 300px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 400;
@@ -27,14 +27,14 @@
 
 .Card .Panel .Rank {
     display: inline-block;
-    font-size: 42px;
+    font-size: 36px;
     font-weight: 100;
 }
 
 .Card .Panel .Suit {
     display: inline-block;
     padding: 6px 0 0 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     float: right;
@@ -53,6 +53,12 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+.Card .Panel .Icon svg {
+    width: 20px;
+    height: 25px;
+    margin-top: 5px;
+}
+
 .Card .Panel .Svg {
     display: block;
     height: 100%;
@@ -62,7 +68,7 @@
 .Card .Content {
     display: table;
     width: 100%;
-    height: 250px;
+    height: 300px;
     padding: 110px 20px;
     box-sizing: border-box;
     text-align: center;

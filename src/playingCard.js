@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import SpadeSVG from './svg/spade.svg';
+import HeartSVG from './svg/heart.svg';
+import ClubsSVG from './svg/club.svg';
+import DiamondSVG from './svg/diamond.svg';
 import JackSVG from './svg/jack.svg';
 
 import { Card } from 'material-ui/Card';
@@ -7,9 +10,16 @@ import './playingCard.css';
 
 export default class PlayingCard extends Component {
 
+    renderSuit(suit) { 
+        return suit === 'spades' ? (<SpadeSVG />) : 
+            suit === 'hearts' ? (<HeartSVG />) :
+            suit === 'clubs' ? (<ClubsSVG />) :
+            suit === 'diamonds' ? (<DiamondSVG />) : null;
+    }
+
     render() {
         return (
-            <Card className="Card">
+            <div className="Card">
                 <div className="Panel Top">
                     <div className="Rank">
                         {this.props.card.getRank()}
@@ -18,15 +28,15 @@ export default class PlayingCard extends Component {
                         {this.props.card.getSuit()}
                     </div>
                     <div className="Icon">
-                        <SpadeSVG width="20" height="20" />
+                        {this.renderSuit(this.props.card.getSuit())}
                     </div>
                 </div>
                 <div className="Content">
-                    <JackSVG />
+                    <div><JackSVG /></div>
                 </div>
                 <div className="Panel Bottom">
                 </div>
-            </Card>
+            </div>
         )
     }
 }
