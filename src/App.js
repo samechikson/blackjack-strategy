@@ -148,7 +148,7 @@ class App extends Component {
         <Header />
         <div className="Dealer">
           <h4>Dealer</h4>
-          <Hand cards={this.state.dealerHand} hideFirst={!this.state.showDealerHand} />
+          <Hand cards={this.state.dealerHand} hideFirst={!this.state.showDealerHand} type="Dealer" />
         </div>
         <div className="Player">
           <h4>Player</h4>
@@ -163,16 +163,17 @@ class App extends Component {
           }}/>
           <RaisedButton className="ActionButton" label="Split" secondary={true} onClick={() => this.checkStrategy('P')} />
           <RaisedButton className="ActionButton" label="Double" secondary={true} onClick={() => this.checkStrategy('D')} />
+            &nbsp;
+          <RaisedButton className="ActionButton" label="Restart" primary={true} onClick={() => this.restart()} />
           <h5>Count: {this.state.playerCount}</h5>
           <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
-          <Hand cards={this.state.playerHand} hideFirst={false} />
+          <Hand cards={this.state.playerHand} hideFirst={false} type="Player" />
         </div>
         <div className="gameStatus">
           {this.state.gameStatus}
         </div>
 
         <div className="restart">
-          <RaisedButton label="Restart" primary={true} onClick={() => this.restart()} />
         </div>
       </div>
     );

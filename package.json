@@ -36,6 +36,7 @@
     "react-dev-utils": "^3.0.2",
     "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.9",
+    "react-motion-ui-pack": "^0.10.3",
     "react-svg": "^2.1.21",
     "style-loader": "0.18.2",
     "svg-react-loader": "^0.4.5",

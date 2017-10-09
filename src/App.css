@@ -40,3 +40,19 @@ ul.Hand li {
 .ActionButton {
   margin: 0 5px;
 }
+
+.Dealer {
+  position: relative;
+  height: 350px;
+}
+.Player {
+  height: 400px;
+}
+
+.CardParentContainer {
+  position: relative;
+}
+
+.CardContainer {
+  position: absolute;
+}
