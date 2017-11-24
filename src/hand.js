@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PlayingCard from './playingCard.js';
-import { Motion, spring } from 'react-motion';
+import { spring } from 'react-motion';
 import Transition from 'react-motion-ui-pack';
 
 
 export default class Hand extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     renderPlayingCard(card) {
         return (
@@ -47,26 +44,6 @@ export default class Hand extends Component {
     }
 
     render() {
-        // return (
-        //     <Motion
-        //         styles={this.startStyles}>
-        //         {cards =>
-        //             <div className="CardParentContainer">
-        //                 {cards.map((config, i) => {
-        //                     console.log(config);
-        //                     return (<div key={config.key} className="CardContainer" style={{
-        //                                 left: `${config.style.x}px`,
-        //                                 top: `${config.style.y}px`,
-        //                                 zIndex: 100,
-        //                             }}>
-        //                             <PlayingCard card={this.props.cards[i]} />
-        //                     </div>);
-        //                 })}
-        //             </div>
-        //         }
-        //     </Motion>
-        // );
-
         return (
             <Transition
                 appear={{
@@ -79,20 +56,11 @@ export default class Hand extends Component {
                     translateX: window.innerWidth
                 }} >
                 { this.props.cards.map((card, i) => {
-                    console.log(card);
                     return (<div key={card.toString()} style={{left: i*100 + 200}} className="CardContainer">
-                                <PlayingCard card={card} />
+                        <PlayingCard card={card} hide={this.props.hideFirst && i === 0} />
                             </div>);
                 })}
             </Transition>
         );
-
-        // return (
-        //     <ul className="Hand">
-        //         {this.props.cards.map((card, i) => {
-        //             return this.props.hideFirst && i==0 ? this.renderHiddenCard() : this.renderPlayingCard(card);
-        //         })}
-        //     </ul>
-        // );
     }
 }

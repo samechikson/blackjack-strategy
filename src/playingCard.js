@@ -30,7 +30,18 @@ export default class PlayingCard extends Component {
             card.getRank() === 'king' && ['hearts', 'diamonds'].includes(card.getSuit()) ? (<KingRedSVG />) : null;
     }
 
-    render() {
+    faceDownCard() {
+        return (
+            <div className="Card FaceDown">
+                <div className="Panel Top">
+                </div>
+                <div className="Panel Bottom">
+                </div>
+            </div>
+        )
+    }
+
+    faceUpCard() {
         return (
             <div className={"Card " + this.props.card.getSuit()}>
                 <div className="Panel Top">
@@ -51,5 +62,9 @@ export default class PlayingCard extends Component {
                 </div>
             </div>
         )
+    }
+
+    render() {
+        return this.props.hide ? this.faceDownCard() : this.faceUpCard();
     }
 }

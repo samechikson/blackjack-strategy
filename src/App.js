@@ -172,9 +172,6 @@ class App extends Component {
         <div className="gameStatus">
           {this.state.gameStatus}
         </div>
-
-        <div className="restart">
-        </div>
       </div>
     );
   }

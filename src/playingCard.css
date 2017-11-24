@@ -99,3 +99,19 @@
     transform: rotate(180deg);
 }
 
+.Card.FaceDown .Panel {
+    height: 50%;
+    margin: 10px;
+}
+
+.Card.FaceDown .Panel.Top {
+    background-color: #CD4B4D;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.Card.FaceDown .Panel.Bottom {
+    background-color: #37474F;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
