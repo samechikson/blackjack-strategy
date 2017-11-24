@@ -37,16 +37,12 @@ ul.Hand li {
   margin: 1.5em;
 }
 
-.ActionButton {
-  margin: 0 5px;
-}
-
 .Dealer {
   position: relative;
   height: 350px;
 }
 .Player {
-  height: 400px;
+  display: flex;
 }
 
 .CardParentContainer {
@@ -55,4 +51,17 @@ ul.Hand li {
 
 .CardContainer {
   position: absolute;
+}
+
+.ActionButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 40%;
+}
+
+.ActionButton {
+  margin: 5px 5px;
+  width: 150px;
 }

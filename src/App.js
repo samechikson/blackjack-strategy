@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Cards from 'js-playing-cards/src';
 import Card from './Card.js';
 import Strategy from './basicStrategyMatrix.js';
 import Hand from './hand.js';
@@ -18,7 +16,8 @@ class App extends Component {
       playerHand : [],
       dealerCount : 0,
       playerCount : 0,
-      showDealerHand: false
+      showDealerHand: false,
+      gameStatus: 'In Progress'
     }
     this.startState = this.state;
   }
@@ -125,9 +124,14 @@ class App extends Component {
       dealerHand: dealerHand,
       dealerCount: dealerCount,
       showDealerHand: true,
-      gameStatus: dealerCount == this.state.playerCount ? 'Push' : 
+      gameStatus: dealerCount === this.state.playerCount ? 'Push' : 
                     dealerCount < this.state.playerCount || dealerCount > 21 ? 'Player Wins' : 'Dealer Wins'
     })
+
+    // Restart the game after a second.
+    window.setTimeout(() => {
+      this.restart.apply(this);
+    }, 1000);
   }
 
   restart() {
@@ -137,7 +141,7 @@ class App extends Component {
       dealerCount : 0,
       playerCount : 0,
       showDealerHand: false,
-      gameStatus: ''
+      gameStatus: 'In Progress'
     },
     this.dealCards);
   }
@@ -150,27 +154,28 @@ class App extends Component {
           <h4>Dealer</h4>
           <Hand cards={this.state.dealerHand} hideFirst={!this.state.showDealerHand} type="Dealer" />
         </div>
+        <h4 style={{textAlign: 'center'}}>Player</h4>
         <div className="Player">
-          <h4>Player</h4>
-          <RaisedButton className="ActionButton" label="Hit" primary={true} onClick={() => {
-            this.checkStrategy('H');
-            this.addCardToPlayer();
-          }}/>
-          <RaisedButton className="ActionButton" label="Stand" onClick={() => {
-            this.checkStrategy('S');
-            this.finishHand();
-            // this.restart();
-          }}/>
-          <RaisedButton className="ActionButton" label="Split" secondary={true} onClick={() => this.checkStrategy('P')} />
-          <RaisedButton className="ActionButton" label="Double" secondary={true} onClick={() => this.checkStrategy('D')} />
-            &nbsp;
-          <RaisedButton className="ActionButton" label="Restart" primary={true} onClick={() => this.restart()} />
-          <h5>Count: {this.state.playerCount}</h5>
-          <p>Correct Move: {this.state.isCorrectStrategy ? "yes": "no"}</p>
+          <div className="ActionButtons">
+            <RaisedButton className="ActionButton" label="Hit" primary={true} onClick={() => {
+              this.checkStrategy('H');
+              this.addCardToPlayer();
+            }}/>
+            <RaisedButton className="ActionButton" label="Stand" onClick={() => {
+              this.checkStrategy('S');
+              this.finishHand();
+              // this.restart();
+            }}/>
+            <RaisedButton className="ActionButton" label="Split" secondary={true} onClick={() => this.checkStrategy('P')} />
+            <RaisedButton className="ActionButton" label="Double" secondary={true} onClick={() => this.checkStrategy('D')} />
+              &nbsp;
+            <RaisedButton className="ActionButton" label="Restart" primary={true} onClick={() => this.restart()} />
+          </div>
           <Hand cards={this.state.playerHand} hideFirst={false} type="Player" />
-        </div>
-        <div className="gameStatus">
-          {this.state.gameStatus}
+          <div style={{width: '25%'}}></div>
+          <div className="gameStatus">
+            <h5>{this.state.gameStatus}</h5>
+          </div>
         </div>
       </div>
     );
