@@ -84,6 +84,15 @@ class App extends Component {
       playerHand : playerHand,
       playerCount : this.state.playerCount + newCard.getCount()
     })
+
+    if (this.state.playerCount + newCard.getCount() > 21) {
+      this.setState({gameStatus: 'Player bust'});
+
+      // Restart the game after a second.
+      window.setTimeout(() => {
+        this.restart.apply(this);
+      }, 1000);
+    }
   }
 
   componentDidMount() {
@@ -94,8 +103,9 @@ class App extends Component {
     let isCorrect;
     let playerCount = this.state.playerCount;
     let dealerShowingCount = this.state.dealerHand[1].getCount();
+
     // Check for splitting possibility.
-    if (this.state.playerCount % 2 == 0 && Strategy.splits[playerCount][dealerShowingCount] != '0') {
+    if (this.state.playerCount < 22 && this.state.playerCount % 2 == 0 && Strategy.splits[playerCount][dealerShowingCount] != '0') {
       isCorrect = strategy.indexOf(Strategy.splits[playerCount][dealerShowingCount]) >= 0;
     }
     else {
@@ -170,12 +180,9 @@ class App extends Component {
             <RaisedButton className="ActionButton" label="Double" secondary={true} onClick={() => this.checkStrategy('D')} />
               &nbsp;
             <RaisedButton className="ActionButton" label="Restart" primary={true} onClick={() => this.restart()} />
-          </div>
-          <Hand cards={this.state.playerHand} hideFirst={false} type="Player" />
-          <div style={{width: '25%'}}></div>
-          <div className="gameStatus">
             <h5>{this.state.gameStatus}</h5>
           </div>
+          <Hand cards={this.state.playerHand} hideFirst={false} type="Player" />
         </div>
       </div>
     );
