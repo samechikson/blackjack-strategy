@@ -138,10 +138,12 @@ class App extends Component {
                     dealerCount < this.state.playerCount || dealerCount > 21 ? 'Player Wins' : 'Dealer Wins'
     })
 
+
+
     // Restart the game after a second.
-    window.setTimeout(() => {
-      this.restart.apply(this);
-    }, 1000);
+    // window.setTimeout(() => {
+    //   this.restart.apply(this);
+    // }, 1000);
   }
 
   restart() {

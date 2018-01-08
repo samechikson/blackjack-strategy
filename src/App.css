@@ -59,6 +59,11 @@ ul.Hand li {
   justify-content: center;
   align-items: flex-end;
   width: 40%;
+  padding-right: 30px;
+}
+
+.ActionButtons + div {
+  width: 60%;
 }
 
 .ActionButton {

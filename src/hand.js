@@ -5,6 +5,7 @@ import Transition from 'react-motion-ui-pack';
 
 
 export default class Hand extends Component {
+    cardSpacing = window.innerWidth / 10;
 
     renderPlayingCard(card) {
         return (
@@ -50,13 +51,13 @@ export default class Hand extends Component {
                     translateX: 0
                 }}
                 enter={{
-                    translateX: window.innerWidth / 2 - 300
+                    translateX: window.innerWidth / 2 - this.cardSpacing
                 }}
                 leave={{
                     translateX: window.innerWidth
                 }} >
                 { this.props.cards.map((card, i) => {
-                    return (<div key={card.toString()} style={{left: i*100 + 200}} className="CardContainer">
+                    return (<div key={card.toString()} style={{left: i*100}} className="CardContainer">
                         <PlayingCard card={card} hide={this.props.hideFirst && i === 0} />
                             </div>);
                 })}
